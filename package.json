@@ -1,8 +1,7 @@
 {
-{
-  "name": "apna-manch-backend",
+  "name": "apna-munch-backend",
   "version": "1.0.0",
-  "description": "Apna Manch backend",
+  "description": "Apna Munch backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
