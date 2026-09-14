@@ -1,4 +1,5 @@
 {
+{
   "name": "apna-manch-backend",
   "version": "1.0.0",
   "description": "Apna Manch backend",
@@ -8,6 +9,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
   }
 }
