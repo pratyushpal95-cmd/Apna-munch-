@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apna Munch</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .app {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Header */
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(#0008, transparent);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search {
+      font-size: 24px;
+    }
+
+    /* Video */
+    .feed {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .video {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #202020, #111);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .play {
+      font-size: 60px;
+      opacity: .8;
+    }
+
+    /* Info */
+    .info {
+      position: absolute;
+      bottom: 85px;
+      left: 15px;
+      right: 80px;
+    }
+
+    .username {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .caption {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    /* Actions */
+    .actions {
+      position: absolute;
+      right: 15px;
+      bottom: 115px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+    }
+
+    .action {
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .count {
+      display: block;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    /* Bottom navigation */
+    .nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: #090909;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 20;
+      border-top: 1px solid #222;
+    }
+
+    .nav-item {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .nav-item span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+
+    .upload {
+      width: 48px;
+      height: 38px;
+      background: #fff;
+      color: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      margin: auto;
+    }
+
+    /* Mobile */
+    @media (min-width: 700px) {
+      .app {
+        max-width: 450px;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div class="logo">🔥 Apna Munch</div>
+    <div class="search">🔍</div>
+  </div>
+
+  <div class="feed">
+
+    <div class="video" onclick="playVideo()">
+      <div class="play" id="play">▶</div>
+    </div>
+
+    <div class="info">
+      <div class="username">@apnamunch_user</div>
+      <div class="caption">
+        Welcome to Apna Munch 🚀<br>
+        Apni video upload karo aur duniya ke saath share karo!
+      </div>
+    </div>
+
+    <div class="actions">
+
+      <div class="action" onclick="likeVideo()">
+        ❤️
+        <span class="count" id="likes">0</span>
+      </div>
+
+      <div class="action" onclick="commentVideo()">
+        💬
+        <span class="count">Comment</span>
+      </div>
+
+      <div class="action" onclick="shareVideo()">
+        ↗️
+        <span class="count">Share</span>
+      </div>
+
+      <div class="action">
+        👤
+        <span class="count">Follow</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="nav">
+
+    <div class="nav-item">
+      <span>🏠</span>
+      Home
+    </div>
+
+    <div class="nav-item">
+      <span>🔎</span>
+      Discover
+    </div>
+
+    <div class="nav-item">
+      <div class="upload">＋</div>
+      Upload
+    </div>
+
+    <div class="nav-item">
+      <span>🔔</span>
+      Activity
+    </div>
+
+    <div class="nav-item">
+      <span>👤</span>
+      Profile
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+let likes = 0;
+let liked = false;
+
+function likeVideo() {
+  if (!liked) {
+    likes++;
+    liked = true;
+  } else {
+    likes--;
+    liked = false;
+  }
+
+  document.getElementById("likes").innerText = likes;
+}
+
+function commentVideo() {
+  const comment = prompt("अपना comment लिखें:");
+  if (comment) {
+    alert("Comment added: " + comment);
+  }
+}
+
+function shareVideo() {
+  if (navigator.share) {
+    navigator.share({
+      title: "Apna Munch",
+      text: "Apna Munch पर यह video देखो!"
+    });
+  } else {
+    alert("Share option आपके browser में उपलब्ध नहीं है।");
+  }
+}
+
+function playVideo() {
+  const play = document.getElementById("play");
+
+  if (play.innerText === "▶") {
+    play.innerText = "⏸";
+  } else {
+    play.innerText = "▶";
+  }
+}
+
+</script>
+
+</body>
+</html>
