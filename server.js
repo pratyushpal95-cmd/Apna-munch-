@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static("public"));
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
